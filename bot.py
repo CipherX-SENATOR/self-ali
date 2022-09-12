@@ -1137,13 +1137,13 @@ async def main():
                             draw = ImageDraw.Draw(img)
                             draw.text((130, 480),f"~~ {time} ~~", font=font)
                             img.save('Image/timeLock.jpg')
-                            file = await client.send_message('g0Bi72c0a47f8824b43aea7a896bb3dd', file_inline='Image/timeLock.jpg')
+                            file = await client.send_message(admins, file_inline='Image/timeLock.jpg')
                             file_id = file.message_update.message.file_inline.file_id
                             c = await client(methods.chats.GetAvatars(admins))
                             avatar_id = c.avatars[0].avatar_id
                             await client(methods.chats.DeleteAvatar(admins, avatar_id))
                             await client(methods.chats.UploadAvatar(admins, main_file_id=file_id, thumbnail_file_id=file_id))
-                            await client(methods.messages.DeleteMessages('g0Bi72c0a47f8824b43aea7a896bb3dd', file.message_update.message_id))
+                            await client(methods.messages.DeleteMessages(admins, file.message_update.message_id))
                     else:
                         pass
 
